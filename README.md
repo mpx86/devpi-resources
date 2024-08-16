@@ -77,8 +77,8 @@ sudo systemctl daemon-reload
 Enable devpi service on startup, then start the service manually:
 
 ```shell
-`sudo systemctl enable devpi.service`
-`sudo systemctl start devpi.service`
+sudo systemctl enable devpi.service
+sudo systemctl start devpi.service
 ```
 
 Monitor systemctl status in realtime:
