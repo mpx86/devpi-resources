@@ -1,4 +1,4 @@
-# devpi-resources# devpi-resources
+# devpi-resources
 
 Documentation and other resources on installing and configuring devpi
 
