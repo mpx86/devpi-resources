@@ -106,7 +106,8 @@ devpi-passwd root --serverdir /home/devpi/devpi-server/data
 devpi login root
 ```
 
-Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/)
+Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/).
+
 You will be prompted to create a password.
 
 `devpi user -c packages email=packager@contoso.com password=packages`
