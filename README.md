@@ -1,6 +1,8 @@
 # devpi-resources
 
-Documentation and other resources on installing and configuring devpi
+Documentation and other resources on installing and configuring devpi.
+
+This documentation is based on using Ubuntu 24.04. 
 
 ## Prerequisite steps on AWS
 
