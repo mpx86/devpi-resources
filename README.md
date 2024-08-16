@@ -103,7 +103,7 @@ Configure root user password, then log in as root:
 
 ```shell
 devpi-passwd root --serverdir /home/devpi/devpi-server/data
-devpi login root --password
+devpi login root
 ```
 
 Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/)
