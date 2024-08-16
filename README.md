@@ -150,3 +150,4 @@ Use this commnad to restrict admin changes such as index and user creation to on
 - Figure out how to integrate GitHub Actions
 - Determine if containerization is appropriate
 - Figure out how to use secret managers to passing in passwords in unattended fashion
+- Figure out theming
