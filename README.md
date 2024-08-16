@@ -96,7 +96,7 @@ Log in as devpi, switch into your devpi venv then tell devpi to use your instanc
 ```shell
 sudo su - devpi
 source devpi-venv/bin/activate
-devpi use http://localhost:3141/root
+devpi use http://localhost:3141/root/pypi
 ```
 
 Configure root user password, then log in as root:
