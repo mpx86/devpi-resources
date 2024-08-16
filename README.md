@@ -118,7 +118,7 @@ Verify new user exists. This is not needed in any automation scripts:
 
 Log in as packages user:
 
-`devpi login packages --password`
+`devpi login packages`
 
 Create new index. Volatile allows editing. Empty `bases` means
 it won't cache any upstream packages from public PyPI
