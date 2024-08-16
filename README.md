@@ -143,7 +143,7 @@ URL Format: http://your-devpi-domain-or-ip:3141/username/indexname
 
 `python3 -m twine upload --repository-url http://devpi.contoso.com:3141/packages/dev dist/*`
 
-## Useful Tips:
+## Useful Tips
 Use this commnad to restrict admin changes such as index and user creation to only the root user:
 `devpi-server --restrict-modify=root`
 
