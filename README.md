@@ -102,7 +102,7 @@ devpi use http://localhost:3141/root/pypi
 Configure root user password, then log in as root:
 
 ```shell
-devpi-passwd root
+devpi-passwd root --serverdir /home/devpi/devpi-server/data
 devpi login root --password
 ```
 
