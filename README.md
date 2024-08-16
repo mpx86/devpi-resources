@@ -83,7 +83,7 @@ sudo systemctl enable devpi.service
 sudo systemctl start devpi.service
 ```
 
-Monitor systemctl status in realtime:
+Monitor service status in realtime:
 
 `sudo journalctl -u devpi.service -f`
 
