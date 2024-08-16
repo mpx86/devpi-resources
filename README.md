@@ -1,1 +1,149 @@
-# devpi-resources
+# devpi-resources# devpi-resources
+
+Documentation and other resources on installing and configuring devpi
+
+## Prerequisite steps on AWS
+
+1. Create t3.small instance
+2. Allow ports 22 and 3141 in security group
+3. SSH into instance
+
+## Steps to run inside the EC2 instance
+
+Install updates and reboot:
+
+```shell
+sudo apt update && sudo apt upgrade
+sudo reboot
+```
+
+Create devpi user, add to sudoers, enable passwordless sudo
+
+```shell
+sudo adduser devpi
+sudo usermod -aG sudo devpi
+echo "devpi ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo /etc/sudoers.d/90-cloud-init-users
+```
+
+Log in as devpi user:
+
+`sudo su - devpi`
+
+Install Python, pip, and venv:
+
+`sudo apt install python3 python3-pip python3-venv -y`
+
+Create venv called devpi-venv and switch into that env:
+
+```sh
+python3 -m venv devpi-venv
+source devpi-venv/bin/activate
+```
+
+Install devpi server, web interface, and client:
+
+`pip install devpi-server devpi-web devpi-client`
+
+Create directory for devpi files:
+
+`mkdir devpi-server`
+
+Init devpi:
+
+`devpi-init --serverdir /home/devpi/devpi-server/data`
+
+Generate config files for devpi:
+
+`devpi-gen-config`
+
+Edit the service file:
+
+`nano gen-config/devpi.service`
+
+Modify this line with your path:
+
+```sh
+[Service]
+ExecStart=/path/to/your/venv/bin/devpi-server --serverdir /home/devpi/devpi-server/data --host 0.0.0.0 --port 3141
+```
+
+Copy the modified service to the systemd folder, then refresh service info from /etc/systemd/system:
+
+```shell
+sudo cp gen-config/devpi.service /etc/systemd/system/
+sudo systemctl daemon-reload
+```
+
+Enable devpi service on startup, then start the service manually:
+
+```shell
+`sudo systemctl enable devpi.service`
+`sudo systemctl start devpi.service`
+```
+
+Monitor systemctl status in realtime:
+
+`sudo journalctl -u devpi.service -f`
+
+## The following are devpi client commands to configure certain settings
+
+Tell devpi to use your instance
+
+`devpi use http://localhost:3141/root`
+
+Configure root user password, then log in as root
+
+```shell
+`devpi-passwd root`
+`devpi login root --password`
+```
+
+Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/)
+
+`devpi user -c packages email=packager@contoso.com password=packages`
+
+Verify new user exists. This is not needed in any automation scripts:
+
+`devpi user -l`
+
+Change password securely after user creation. This won't show pw input on screen:
+
+`devpi-passwd packages`
+
+Log in as packages user:
+
+`devpi login packages --password`
+
+Create new index. Volatile allows editing. Empty `bases` means
+it won't cache any upstream packages from public PyPI
+
+`devpi index -c dev bases= volatile=True`
+
+Make default index volatile (editable), then delete default index:
+
+```shell
+devpi index root/pypi volatile=True
+devpi index root/pypi --delete
+```
+
+>[!NOTE]
+>You may need to reboot to stop indexing. My test server didn't stop indexing 
+> PyPI packages until I rebooted. The indexing process is CPU-intensive.
+
+## Follow up tasks
+
+- Figure out SSH
+- Figure out how to integrate GitHub Actions
+- Determine if containerization is appropriate
+- Figure out how to use secret managers to passing in passwords in unattended fashion
+
+## How to upload Python packages to your devpi server
+
+Ensure you have the latest version of Twine installed:
+
+`python3 -m pip install --upgrade twine`
+
+From inside your package directory, run the following command:
+URL Format: http://your-devpi-domain-or-ip:3141/username/indexname 
+
+`python3 -m twine upload --repository-url http://devpi.contoso.com:3141/packages/dev dist/*`
