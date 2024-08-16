@@ -87,7 +87,9 @@ Monitor service status in realtime:
 
 `sudo journalctl -u devpi.service -f`
 
-## The following are devpi client commands to configure certain settings
+## devpi client commands
+
+This section uses the devpi client to configure index settings. 
 
 If you want to keep your monitoring session going, launch a new ssh session before running the following tasks.
 
