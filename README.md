@@ -6,7 +6,7 @@ This documentation is based on using Ubuntu 24.04.
 
 ## Prerequisite steps on AWS
 
-1. Create t3.small or larger instance. t2.micro and t3.micro do not have enough CPU capacity and will hang
+1. Create t3.small or larger instance. t2.micro and t3.micro do not have enough CPU or memory capacity and will hang
 2. Allow ports 22 and 3141 in the security group. 3141 is the default port for devpi, but this can be changed
 3. SSH into instance
 
