@@ -130,13 +130,6 @@ devpi index root/pypi --delete
 >You may need to reboot to stop indexing. My test server didn't stop indexing 
 > PyPI packages until I rebooted. The indexing process is CPU-intensive.
 
-## Follow up tasks
-
-- Figure out SSH
-- Figure out how to integrate GitHub Actions
-- Determine if containerization is appropriate
-- Figure out how to use secret managers to passing in passwords in unattended fashion
-
 ## How to upload Python packages to your devpi server
 
 Ensure you have the latest version of Twine installed:
@@ -147,3 +140,14 @@ From inside your package directory, run the following command:
 URL Format: http://your-devpi-domain-or-ip:3141/username/indexname 
 
 `python3 -m twine upload --repository-url http://devpi.contoso.com:3141/packages/dev dist/*`
+
+## Follow up tasks
+
+- Figure out SSH
+- Figure out how to integrate GitHub Actions
+- Determine if containerization is appropriate
+- Figure out how to use secret managers to passing in passwords in unattended fashion
+  
+## Useful Tips:
+Use this commnad to restrict admin changes such as index and user creation to only the root user:
+`devpi-server --restrict-modify=root`
