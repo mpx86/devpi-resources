@@ -66,7 +66,7 @@ Modify this line with your path:
 
 ```sh
 [Service]
-ExecStart=/path/to/your/venv/bin/devpi-server --serverdir /home/devpi/devpi-server/data --host 0.0.0.0 --port 3141
+ExecStart=/home/devpi/devpi-venv/bin/devpi-server --serverdir /home/devpi/devpi-server/data --host 0.0.0.0 --port 3141
 ```
 
 Copy the modified service to the systemd folder, then refresh service info from /etc/systemd/system:
