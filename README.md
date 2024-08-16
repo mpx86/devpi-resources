@@ -89,11 +89,17 @@ Monitor systemctl status in realtime:
 
 ## The following are devpi client commands to configure certain settings
 
-Tell devpi to use your instance
+If you want to keep your monitoring session going, launch a new ssh session before running the following tasks.
 
-`devpi use http://localhost:3141/root`
+Log in as devpi, switch into your devpi venv then tell devpi to use your instance:
 
-Configure root user password, then log in as root
+```shell
+sudo su - devpi
+source devpi-venv/bin/activate
+devpi use http://localhost:3141/root
+```
+
+Configure root user password, then log in as root:
 
 ```shell
 devpi-passwd root
