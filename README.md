@@ -125,16 +125,17 @@ it won't cache any upstream packages from public PyPI
 
 `devpi index -c dev bases= volatile=True`
 
-Make default index volatile (editable), then delete default index:
+Switch to the root user again, switch to packages index, make default index volatile (editable), then delete default index:
 
 ```shell
+devpi login root
+devpi use http://localhost:3141/packages/dev
 devpi index root/pypi volatile=True
 devpi index root/pypi --delete
 ```
 
 >[!NOTE]
->You may need to reboot to stop indexing. My test server didn't stop indexing 
-> PyPI packages until I rebooted. The indexing process is CPU-intensive.
+>You will need to restart the devpi systemd service to stop indexing upstream PyPI content. The indexing process is CPU-intensive, so you should do this ASAP.
 
 ## How to upload Python packages to your devpi server
 
