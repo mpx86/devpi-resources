@@ -107,16 +107,13 @@ devpi login root
 ```
 
 Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/)
+You will be prompted to create a password.
 
 `devpi user -c packages email=packager@contoso.com password=packages`
 
 Verify new user exists. This is not needed in any automation scripts:
 
 `devpi user -l`
-
-Change password securely after user creation. This won't show pw input on screen:
-
-`devpi-passwd packages`
 
 Log in as packages user:
 
