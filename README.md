@@ -145,9 +145,8 @@ URL Format: http://your-devpi-domain-or-ip:3141/username/indexname
 Use this commnad to restrict admin changes such as index and user creation to only the root user:
 `devpi-server --restrict-modify=root`
 
-## Follow up tasks
+## Follow up tasks to be added later
 
-- Figure out SSH
 - Figure out how to integrate GitHub Actions
 - Determine if containerization is appropriate
 - Figure out how to use secret managers to passing in passwords in unattended fashion
