@@ -94,8 +94,8 @@ Tell devpi to use your instance
 Configure root user password, then log in as root
 
 ```shell
-`devpi-passwd root`
-`devpi login root --password`
+devpi-passwd root
+devpi login root --password
 ```
 
 Create 'packages' user. This username will be included in the index URL (e.g.: http://localhost:3141/packages/)
