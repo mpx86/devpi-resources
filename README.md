@@ -5,7 +5,7 @@ Documentation and other resources on installing and configuring devpi
 ## Prerequisite steps on AWS
 
 1. Create t3.small or larger instance. t2.micro doesn't have enough CPU capacity and will hang
-2. Allow ports 22 and 3141 in security group. 3141 is the default port for devpi, but this can be changed
+2. Allow ports 22 and 3141 in the security group. 3141 is the default port for devpi, but this can be changed
 3. SSH into instance
 
 ## Steps to run inside the EC2 instance
