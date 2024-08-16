@@ -22,7 +22,7 @@ sudo reboot
 Create devpi user, add to sudoers, enable passwordless sudo
 
 ```shell
-sudo adduser devpi
+sudo useradd -m -s /bin/bash devpi
 sudo usermod -aG sudo devpi
 echo "devpi ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo /etc/sudoers.d/90-cloud-init-users
 ```
