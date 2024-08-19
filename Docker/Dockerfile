@@ -25,6 +25,12 @@ RUN useradd -m -s /bin/bash $DEVPI_USER
 RUN mkdir -p $SERVER_DIR && \
     chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR
 
+# Copy the entrypoint script to the container
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Ensure the script is executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
 
@@ -33,10 +39,6 @@ USER $DEVPI_USER
 
 # Set the working directory
 WORKDIR $SERVER_DIR
-
-# Copy the entrypoint script to the container
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Set the entrypoint to the script
 ENTRYPOINT ["entrypoint.sh"]
