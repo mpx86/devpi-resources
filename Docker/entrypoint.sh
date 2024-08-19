@@ -9,7 +9,7 @@ mkdir -p "$SERVER_DIR"
 # Initialize the server directory if not already done
 if [ ! -f "$SERVER_DIR/.serverversion" ]; then
     echo "Initializing devpi server directory at $SERVER_DIR"
-    devpi-server --init --serverdir "$SERVER_DIR"
+    devpi-init --init --serverdir "$SERVER_DIR" --no-root-pypi
 fi
 
 # Start devpi-server in the background to allow creating users and indices
