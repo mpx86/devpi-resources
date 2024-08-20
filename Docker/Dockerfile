@@ -4,6 +4,7 @@ FROM python:3.10-slim
 # Set environment variables for non-root user
 ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=contoso
+ENV DEVPI_INDEX_NAME=packages
 ENV SERVER_DIR=/app/devpi
 ENV DEVPI_PORT=3141
 ENV VENV_DIR=/app/venv
