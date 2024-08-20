@@ -36,13 +36,15 @@ devpi-server --serverdir "$SERVER_DIR" \
 sleep 5
 
 # Set up the devpi user and the 'packages' index
+echo "Attempting to use localhost: $DEVPI_PORT"
 devpi use http://localhost:$DEVPI_PORT
+echo "Attempting to create index:"
+devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
 echo "Attempting to create user with hashed password of $DEVPI_PWHASH:"
 devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
 echo "Attempting to log in as user:"
 devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
-echo "Attempting to create index:"
-devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
+
 
 # Kill the background server
 pkill -f "devpi-server"
