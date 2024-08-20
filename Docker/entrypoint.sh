@@ -11,9 +11,12 @@ echo "DEVPI_PWHASH: $DEVPI_PWHASH"
 
 # Ensure the devpi-server directory exists
 echo "Checking to see if SERVER_DIR $SERVER_DIR EXISTS"
+echo "Printing working directory"
+pwd
 echo "Checking file structure and permissions"
-ls -l
+ls -l >&1
 mkdir -p "$SERVER_DIR"
+ls -l "$SERVER_DIR" >&1  # Check contents after creating the directory
 
 # Initialize the server directory if not already done
 if [ ! -f "$SERVER_DIR/.serverversion" ]; then
