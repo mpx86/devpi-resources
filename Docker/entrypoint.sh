@@ -23,8 +23,11 @@ sleep 5
 
 # Set up the devpi user and the 'packages' index
 devpi use http://localhost:$DEVPI_PORT
+echo "Attempting to create user with hashed password of $DEVPI_PWHASH:"
 devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
+echo "Attempting to log in as user:"
 devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
+echo "Attempting to create index:"
 devpi index -c $DEVPI_INTERNAL_USER/packages
 
 # Kill the background server
