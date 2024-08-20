@@ -4,13 +4,8 @@ FROM python:3.10-slim
 # Set environment variables for non-root user
 ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=contoso
-ENV SERVER_DIR=/data/devpi
+ENV SERVER_DIR=/app/devpi
 ENV DEVPI_PORT=3141
-
-# Install system dependencies (if any are needed for devpi)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libsqlite3-dev \
-    && rm -rf /var/lib/apt/lists/*
 
 # Install devpi-server, devpi-client, and devpi-web
 RUN pip install --no-cache-dir \
