@@ -3,6 +3,9 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Activate the virtual environment
+source /app/venv/bin/activate
+
 # Output environment variables for verification
 echo "SERVER_DIR: $SERVER_DIR"
 echo "DEVPI_PORT: $DEVPI_PORT"

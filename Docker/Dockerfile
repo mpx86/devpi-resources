@@ -6,7 +6,7 @@ ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=contoso
 ENV SERVER_DIR=/app/devpi
 ENV DEVPI_PORT=3141
-ENV VENV_DIR=/home/$DEVPI_USER/devpi-venv
+ENV VENV_DIR=/app/venv
 
 # Create a non-root user to run the application
 RUN useradd -m -s /bin/bash $DEVPI_USER
@@ -32,6 +32,9 @@ RUN $VENV_DIR/bin/pip install --no-cache-dir \
     devpi-server \
     devpi-client \
     devpi-web
+
+# Change ownership of the venv directory to the devpi user
+RUN chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
 
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
