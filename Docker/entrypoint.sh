@@ -3,6 +3,12 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Output environment variables for verification
+echo "SERVER_DIR: $SERVER_DIR"
+echo "DEVPI_PORT: $DEVPI_PORT"
+echo "DEVPI_INTERNAL_USER: $DEVPI_INTERNAL_USER"
+echo "DEVPI_PWHASH: $DEVPI_PWHASH"
+
 # Ensure the devpi-server directory exists
 mkdir -p "$SERVER_DIR"
 
