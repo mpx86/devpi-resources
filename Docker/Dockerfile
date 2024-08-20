@@ -30,7 +30,7 @@ USER $DEVPI_USER
 RUN python3 -m venv $VENV_DIR
 
 # Activate the virtual environment and install devpi-server, devpi-client, and devpi-web
-RUN source $VENV_DIR/bin/activate
+RUN . /app/venv/bin/activate
 RUN $VENV_DIR/bin/pip install --no-cache-dir \
     devpi-server \
     devpi-client \

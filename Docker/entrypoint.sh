@@ -6,21 +6,6 @@ set -e
 # Activate the virtual environment
 source /app/venv/bin/activate
 
-# Output environment variables for verification
-echo "SERVER_DIR: $SERVER_DIR"
-echo "DEVPI_PORT: $DEVPI_PORT"
-echo "DEVPI_INTERNAL_USER: $DEVPI_INTERNAL_USER"
-echo "DEVPI_PWHASH: $DEVPI_PWHASH"
-
-# # Ensure the devpi-server directory exists
-# echo "Checking to see if SERVER_DIR $SERVER_DIR EXISTS"
-# echo "Printing working directory"
-# pwd
-# echo "Checking file structure and permissions"
-# ls -l >&1
-# mkdir -p "$SERVER_DIR"
-# ls -l "$SERVER_DIR" >&1  # Check contents after creating the directory
-
 # Initialize the server directory if not already done
 if [ ! -f "$SERVER_DIR/.serverversion" ]; then
     echo "Initializing devpi server directory at $SERVER_DIR"
@@ -36,15 +21,10 @@ devpi-server --serverdir "$SERVER_DIR" \
 sleep 5
 
 # Set up the devpi user and the 'packages' index
-echo "Attempting to use localhost: $DEVPI_PORT"
 devpi use http://localhost:$DEVPI_PORT
-echo "Attempting to create index:"
 devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
-echo "Attempting to create user with hashed password of $DEVPI_PWHASH:"
 devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
-echo "Attempting to log in as user:"
 devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
-
 
 # Kill the background server
 pkill -f "devpi-server"
