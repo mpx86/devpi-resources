@@ -20,6 +20,14 @@ devpi-server --serverdir "$SERVER_DIR" \
 # Wait for the server to start
 sleep 5
 
+# Checking /app/devpi contents
+echo "Checking /app/devpi contents"
+ls -al /app/devpi/
+
+# Checking /app/venv contents
+echo "Checking /app/venv contents"
+ls -al /app/venv/
+
 # Set up the devpi user and the 'packages' index
 echo "Attempting to use http://localhost:$DEVPI_PORT"
 devpi use http://localhost:$DEVPI_PORT
