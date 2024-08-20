@@ -10,9 +10,12 @@ echo "DEVPI_INTERNAL_USER: $DEVPI_INTERNAL_USER"
 echo "DEVPI_PWHASH: $DEVPI_PWHASH"
 
 # Ensure the devpi-server directory exists
+echo "Checking to see if SERVER_DIR $SERVER_DIR EXISTS"
 mkdir -p "$SERVER_DIR"
 
 # Initialize the server directory if not already done
+echo "Checking file structure and permissions"
+ls -l
 if [ ! -f "$SERVER_DIR/.serverversion" ]; then
     echo "Initializing devpi server directory at $SERVER_DIR"
     devpi-init --serverdir "$SERVER_DIR" --no-root-pypi
