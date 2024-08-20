@@ -22,9 +22,9 @@ sleep 5
 
 # Set up the devpi user and the 'packages' index
 devpi use http://localhost:$DEVPI_PORT
-devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
 devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
 devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
+devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
 
 # Kill the background server
 pkill -f "devpi-server"
