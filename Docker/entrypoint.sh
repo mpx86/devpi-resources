@@ -12,14 +12,14 @@ echo "DEVPI_PORT: $DEVPI_PORT"
 echo "DEVPI_INTERNAL_USER: $DEVPI_INTERNAL_USER"
 echo "DEVPI_PWHASH: $DEVPI_PWHASH"
 
-# Ensure the devpi-server directory exists
-echo "Checking to see if SERVER_DIR $SERVER_DIR EXISTS"
-echo "Printing working directory"
-pwd
-echo "Checking file structure and permissions"
-ls -l >&1
-mkdir -p "$SERVER_DIR"
-ls -l "$SERVER_DIR" >&1  # Check contents after creating the directory
+# # Ensure the devpi-server directory exists
+# echo "Checking to see if SERVER_DIR $SERVER_DIR EXISTS"
+# echo "Printing working directory"
+# pwd
+# echo "Checking file structure and permissions"
+# ls -l >&1
+# mkdir -p "$SERVER_DIR"
+# ls -l "$SERVER_DIR" >&1  # Check contents after creating the directory
 
 # Initialize the server directory if not already done
 if [ ! -f "$SERVER_DIR/.serverversion" ]; then
@@ -30,8 +30,7 @@ fi
 # Start devpi-server in the background to allow creating users and indices
 devpi-server --serverdir "$SERVER_DIR" \
     --host 0.0.0.0 \
-    --port "$DEVPI_PORT" \
-    --restrict-modify=root &
+    --port "$DEVPI_PORT" &
 
 # Wait for the server to start
 sleep 5
@@ -43,7 +42,7 @@ devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
 echo "Attempting to log in as user:"
 devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
 echo "Attempting to create index:"
-devpi index -c $DEVPI_INTERNAL_USER/packages
+devpi index -c $DEVPI_INTERNAL_USER/packages volatile=True
 
 # Kill the background server
 pkill -f "devpi-server"
