@@ -6,12 +6,7 @@ ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=contoso
 ENV SERVER_DIR=/app/devpi
 ENV DEVPI_PORT=3141
-
-# Install devpi-server, devpi-client, and devpi-web
-RUN pip install --no-cache-dir \
-    devpi-server \
-    devpi-client \
-    devpi-web
+ENV VENV_DIR=/home/$DEVPI_USER/devpi-venv
 
 # Create a non-root user to run the application
 RUN useradd -m -s /bin/bash $DEVPI_USER
@@ -26,6 +21,18 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 # Ensure the script is executable
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Switch to the devpi user before creating the virtual environment
+USER $DEVPI_USER
+
+# Create a virtual environment under the devpi user's home directory
+RUN python3 -m venv $VENV_DIR
+
+# Activate the virtual environment and install devpi-server, devpi-client, and devpi-web
+RUN $VENV_DIR/bin/pip install --no-cache-dir \
+    devpi-server \
+    devpi-client \
+    devpi-web
+
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
 
@@ -34,6 +41,5 @@ USER $DEVPI_USER
 
 # Set the working directory
 WORKDIR $SERVER_DIR
-
 # Set the entrypoint to the script
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
