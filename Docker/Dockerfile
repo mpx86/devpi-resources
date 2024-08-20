@@ -13,7 +13,9 @@ RUN useradd -m -s /bin/bash $DEVPI_USER
 
 # Create the necessary directories and set the right permissions
 RUN mkdir -p $SERVER_DIR && \
-    chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR
+    mkdir -p ${VENV_DIR} && \
+    chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR && \
+    chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
 
 # Copy the entrypoint script to the container
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -32,9 +34,6 @@ RUN $VENV_DIR/bin/pip install --no-cache-dir \
     devpi-server \
     devpi-client \
     devpi-web
-
-# Change ownership of the venv directory to the devpi user
-RUN chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
 
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
