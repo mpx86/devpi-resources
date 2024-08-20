@@ -6,8 +6,8 @@ ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=contoso
 ENV DEVPI_INDEX_NAME=packages
 ENV SERVER_DIR=/app/devpi
-ENV DEVPI_PORT=3141
 ENV VENV_DIR=/app/venv
+ENV DEVPI_PORT=3141
 
 # Create a non-root user to run the application
 RUN useradd -m -s /bin/bash $DEVPI_USER
@@ -39,9 +39,6 @@ RUN $VENV_DIR/bin/pip install --no-cache-dir \
 
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
-
-# Switch to the non-root user
-USER $DEVPI_USER
 
 # Set the working directory
 WORKDIR $SERVER_DIR

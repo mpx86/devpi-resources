@@ -35,11 +35,9 @@ devpi use http://localhost:$DEVPI_PORT
 echo "Attempting to create $DEVPI_INTERNAL_USER"
 devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
 
-echo "Attempting to log in as $DEVPI_INTERNAL_USER"
-devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
-
-echo "Attempting to create index $DEVPI_INTERNAL_USER/$DEVPI_INDEX_NAME"
-devpi index -c $DEVPI_INTERNAL_USER/$DEVPI_INDEX_NAME volatile=True
+echo "Attempting to log in as $DEVPI_INTERNAL_USER" and create index
+devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH" && \
+devpi index -c dbrg/packages volatile=True
 
 # Kill the background server
 pkill -f "devpi-server"
