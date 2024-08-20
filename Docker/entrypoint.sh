@@ -16,8 +16,7 @@ fi
 devpi-server --serverdir "$SERVER_DIR" \
     --host 0.0.0.0 \
     --port "$DEVPI_PORT" \
-    --restrict-modify=root \
-    --no-root-pypi &
+    --restrict-modify=root &
 
 # Wait for the server to start
 sleep 5
