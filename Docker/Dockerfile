@@ -13,7 +13,7 @@ RUN useradd -m -s /bin/bash $DEVPI_USER
 
 # Create the necessary directories and set the right permissions
 RUN mkdir -p $SERVER_DIR && \
-    mkdir -p ${VENV_DIR} && \
+    mkdir -p $VENV_DIR && \
     chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR && \
     chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
 
@@ -30,7 +30,7 @@ USER $DEVPI_USER
 RUN python3 -m venv $VENV_DIR
 
 # Activate the virtual environment and install devpi-server, devpi-client, and devpi-web
-RUN source ${VENV_DIR}/bin/activate
+RUN source $VENV_DIR/bin/activate
 RUN $VENV_DIR/bin/pip install --no-cache-dir \
     devpi-server \
     devpi-client \
