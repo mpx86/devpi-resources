@@ -32,13 +32,13 @@ ls -al /app/venv/
 echo "Attempting to use http://localhost:$DEVPI_PORT"
 devpi use http://localhost:$DEVPI_PORT
 
-echo "Attempting to create $DEVPI_INTERNAL_USER"
-devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
+# echo "Attempting to create $DEVPI_INTERNAL_USER"
+# devpi user -c $DEVPI_INTERNAL_USER password="$DEVPI_PWHASH"
 
-echo "Attempting to log in as $DEVPI_INTERNAL_USER and create index"
-devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
-sleep 5
-devpi index -c packages volatile=True
+# echo "Attempting to log in as $DEVPI_INTERNAL_USER and create index"
+# devpi login $DEVPI_INTERNAL_USER --password="$DEVPI_PWHASH"
+# sleep 5
+devpi index -c dbrg/packages volatile=True
 
 # Kill the background server
 pkill -f "devpi-server"
