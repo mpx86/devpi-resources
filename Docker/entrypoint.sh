@@ -44,7 +44,7 @@ devpi use http://localhost:$DEVPI_PORT
 # pkill -f "devpi-server"
 
 # Start devpi-server in the foreground with user and index creation restricted to root user
-exec devpi-server --serverdir "$SERVER_DIR" \
-    --host 0.0.0.0 \
-    --port "$DEVPI_PORT" #\
-    #--restrict-modify=root
+# exec devpi-server --serverdir "$SERVER_DIR" \
+#     --host 0.0.0.0 \
+#     --port "$DEVPI_PORT" #\
+#     #--restrict-modify=root
