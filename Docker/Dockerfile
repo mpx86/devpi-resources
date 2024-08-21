@@ -23,13 +23,13 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
     
 # Create a non-root user to run the application
-RUN useradd -m -s /bin/bash $DEVPI_USER
+#RUN useradd -m -s /bin/bash $DEVPI_USER
 
 # Create the necessary directories and set the right permissions
 RUN mkdir -p $SERVER_DIR && \
-    mkdir -p $VENV_DIR && \
-    chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR && \
-    chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
+    mkdir -p $VENV_DIR
+    # chown -R $DEVPI_USER:$DEVPI_USER $SERVER_DIR && \
+    # chown -R $DEVPI_USER:$DEVPI_USER $VENV_DIR
 
 # Copy the entrypoint script to the container
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -38,7 +38,7 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Switch to the devpi user before creating the virtual environment
-USER $DEVPI_USER
+# USER $DEVPI_USER
 
 # Create a virtual environment under the devpi user's home directory
 RUN python3 -m venv $VENV_DIR
