@@ -1,14 +1,27 @@
 # Use an official Python base image with Python 3.10
 FROM python:3.10-slim
 
-# Set environment variables for non-root user
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_CACHE_DIR=1
 ENV DEVPI_USER=devpi
 ENV DEVPI_INTERNAL_USER=dbrg
 ENV DEVPI_INDEX_NAME=packages
+ENV DEVPI_PORT=3141
 ENV SERVER_DIR=/app/devpi
 ENV VENV_DIR=/app/venv
-ENV DEVPI_PORT=3141
 
+# Install missing packages
+RUN set -eux; \
+    \
+    apt-get update --quiet; \
+    apt-get upgrade --yes; \
+    apt-get install --yes --no-install-recommends \
+        procps \
+    ; \
+    rm -rf /var/lib/apt/lists/*
+    
 # Create a non-root user to run the application
 RUN useradd -m -s /bin/bash $DEVPI_USER
 
@@ -36,6 +49,9 @@ RUN $VENV_DIR/bin/pip install --no-cache-dir \
     devpi-server \
     devpi-client \
     devpi-web
+
+# Create volume    
+VOLUME /data
 
 # Expose the port used by Devpi
 EXPOSE $DEVPI_PORT
